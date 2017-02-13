@@ -27,13 +27,14 @@ ExternalProject_Add(
    BINARY_DIR "${CMAKE_SOURCE_DIR}"
    INSTALL_COMMAND ""
    LOG_BUILD ON)
-   
+
 # Create dependency of Example on rust_example
 add_dependencies(summation_udf rust_summation)
 
 # Specify Example's link libraries
 target_link_libraries(summation_udf
-    debug "${CMAKE_SOURCE_DIR}/target/debug/librust_summation.a"
-    optimized "${CMAKE_SOURCE_DIR}/target/release/librust_summation.a")
+  debug "${CMAKE_SOURCE_DIR}/target/debug/librust_summation${CMAKE_STATIC_LIBRARY_SUFFIX}"
+  optimized "${CMAKE_SOURCE_DIR}/target/release/librust_summation${CMAKE_STATIC_LIBRARY_SUFFIX}"
+  )
 
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} ${CMAKE_C_FLAGS_DEBUG} -Wall -g")
